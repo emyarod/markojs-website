@@ -33,9 +33,7 @@ $_mod.def("/headspace$0.1.1/dist/headspace", function(require, exports, module, 
 
       this.addClass(this.classNames.base);
       window.addEventListener('scroll', function () {
-        console.log('headspace scroll called')
         return _this.debounce(function () {
-          console.log('headspace scroll debounced')
           return handleScroll(_this);
         });
       });
@@ -88,8 +86,6 @@ $_mod.def("/headspace$0.1.1/dist/headspace", function(require, exports, module, 
     } else if (scrollCurrent > instance.startOffset && Math.abs(scrollCurrent - scrollLast) >= instance.tolerance) {
       instance[scrollCurrent > scrollLast ? 'hide' : 'fix']();
     }
-
-    console.log('headspace scroll updated')
 
     instance._scrollLast = scrollCurrent;
   }
