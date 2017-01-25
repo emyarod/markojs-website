@@ -1,6 +1,8 @@
 $_mod.def("/marko$4.0.0-rc.8/widgets/event-delegation", function(require, exports, module, __filename, __dirname) { var widgetLookup = require('/marko$4.0.0-rc.8/widgets/util-browser'/*'./util'*/).$__widgetLookup;
 var warp10Parse = require('/warp10$1.3.3/parse'/*'warp10/parse'*/);
 
+var listenersAttached;
+
 function getObjectAttribute(el, attrName) {
     var virtualAttrs = el._vattrs;
 
@@ -87,10 +89,9 @@ function attachBubbleEventListeners(doc) {
 }
 
 exports.$__init = function(doc) {
-    if (!doc.$wb) {
-        doc.$wb = true;
+    if (!listenersAttached) {
+        listenersAttached = true;
         attachBubbleEventListeners(doc);
     }
 };
-
 });

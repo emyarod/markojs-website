@@ -1,1 +1,0 @@
-$_mod.run("/marko$4.0.0-rc.8/widgets/init-widgets-browser");
