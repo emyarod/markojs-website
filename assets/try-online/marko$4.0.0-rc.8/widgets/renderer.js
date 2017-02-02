@@ -165,12 +165,17 @@ module.exports = function createRendererFunc(templateRenderFunc, widgetProps, re
         if (input) {
             if (onInput) {
                 if (existingWidget) {
-                    existingWidget.onInput(input, out);
+                    var updatedInput = existingWidget.onInput(input, out);
+                    if (updatedInput === undefined) {
+                        updatedInput = input;
+                    }
+                    input = existingWidget.input = updatedInput;
                 } else {
                     var lightweightWidget = Object.create(renderingLogic);
-                    lightweightWidget.onInput(input, out);
+                    var updatedInput = lightweightWidget.onInput(input, out);
                     widgetState = finalWidgetState = lightweightWidget.state;
                     widgetConfig = lightweightWidget;
+                    widgetConfig.input = input = updatedInput === undefined ? input : updatedInput;
                     delete widgetConfig.state;
                 }
             } else {
@@ -253,6 +258,8 @@ module.exports = function createRendererFunc(templateRenderFunc, widgetProps, re
         var templateData = (getTemplateData ?
             getTemplateData(finalWidgetState, input, out) :
             (getInitialState && finalWidgetState /*legacy*/) || input) || {};
+
+        var templateData = (existingWidget && existingWidget.input) || input || {};
 
         if (existingWidget) {
             existingWidget.$__emitLifecycleEvent('beforeUpdate');

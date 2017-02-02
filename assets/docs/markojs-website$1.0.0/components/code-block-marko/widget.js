@@ -1,4 +1,4 @@
-$_mod.def("/markojs-website$1.0.0/components/code-block-marko/widget", function(require, exports, module, __filename, __dirname) { var getWidgetForEl = require('/marko$4.0.0-rc.8/widgets/index-browser'/*'marko/widgets'*/).getWidgetForEl;
+$_mod.def("/markojs-website$1.0.0/components/code-block-marko/widget", function(require, exports, module, __filename, __dirname) { var getWidgetForEl = require('/marko$4.0.0-rc.12/widgets/index-browser'/*'marko/widgets'*/).getWidgetForEl;
 
 module.exports = {
     changeSyntax: function() {
