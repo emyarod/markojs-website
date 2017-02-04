@@ -1,0 +1,2 @@
+$_mod.def("/marko$4.0.0-rc.12/widgets/boot", function(require, exports, module, __filename, __dirname) { require('/marko$4.0.0-rc.12/widgets/init-widgets-browser'/*'./init-widgets'*/).$__initServerRendered();
+});

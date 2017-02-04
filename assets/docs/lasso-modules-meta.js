@@ -1,3 +1,5 @@
+$_mod.installed("markojs-website$1.0.0", "marko", "4.0.0-rc.12");
+$_mod.main("/marko$4.0.0-rc.12/widgets", "");
 $_mod.remap("/marko$4.0.0-rc.12/widgets/index", "/marko$4.0.0-rc.12/widgets/index-browser");
 $_mod.remap("/marko$4.0.0-rc.12/widgets/init-widgets", "/marko$4.0.0-rc.12/widgets/init-widgets-browser");
 $_mod.installed("marko$4.0.0-rc.12", "warp10", "1.3.3");
@@ -15,7 +17,3 @@ $_mod.remap("/marko$4.0.0-rc.12/runtime/loader/index-browser", "/marko$4.0.0-rc.
 $_mod.installed("marko$4.0.0-rc.12", "listener-tracker", "2.0.0");
 $_mod.main("/listener-tracker$2.0.0", "lib/listener-tracker");
 $_mod.installed("marko$4.0.0-rc.12", "morphdom", "2.3.1");
-$_mod.installed("markojs-website$1.0.0", "headspace", "0.1.1");
-$_mod.main("/headspace$0.1.1", "dist/headspace");
-$_mod.installed("markojs-website$1.0.0", "marko", "4.0.0-rc.12");
-$_mod.main("/marko$4.0.0-rc.12/widgets", "");

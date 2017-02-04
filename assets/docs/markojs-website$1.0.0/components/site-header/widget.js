@@ -1,31 +1,55 @@
-$_mod.def("/markojs-website$1.0.0/components/site-header/widget", function(require, exports, module, __filename, __dirname) { var Headspace = require('/headspace$0.1.1/dist/headspace'/*'headspace'*/);
-var classNames = {
+$_mod.def("/markojs-website$1.0.0/components/site-header/widget", function(require, exports, module, __filename, __dirname) { var classNames = {
     base: 'headspace',
     fixed: 'headspace--fixed',
     hidden: 'headspace--hidden'
 };
+var debounce = (cb) => window.requestAnimationFrame(cb);
+var tolerance = 4;
 
 module.exports = {
     onMount() {
-        this.headspace = new Headspace(this.el, {
-            showAtBottom: false,
-            classNames: classNames
-        });
-    },
-    save() {
-        this.isHidden = this.el.classList.contains(classNames.hidden);
+        var scrollLast = window.pageYOffset;
+        var startOffset = this.el.offsetHeight;
+
+        var handleScroll = () => {
+            var scrollCurrent = window.pageYOffset;
+
+            if (scrollCurrent <= 0) {
+                this.reset()
+            } else if (!this.paused && scrollCurrent > startOffset && Math.abs(scrollCurrent - scrollLast) >= tolerance) {
+                scrollCurrent > scrollLast ? this.hide() : this.fix();
+            }
+
+            scrollLast = scrollCurrent;
+        };
+
+        window.addEventListener('scroll', handleScroll);
     },
     reset() {
-        var header = this;
-        header.headspace.debounce(function() {
-            setTimeout(function() {
-                if(header.isHidden) {
-                    header.el.classList.add(classNames.hidden);
-                } else {
-                    header.el.classList.remove(classNames.hidden);
-                }
-            });
-        });
+        this.removeClass(classNames.fixed);
+        this.removeClass(classNames.hidden);
+        this.emit('show');
+    },
+    fix() {
+        this.addClass(classNames.fixed);
+        this.removeClass(classNames.hidden);
+        this.emit('show');
+    },
+    hide() {
+        this.addClass(classNames.hidden);
+        this.emit('hide');
+    },
+    addClass(cls) {
+        this.el.classList.add(cls);
+    },
+    removeClass(cls) {
+        this.el.classList.remove(cls);
+    },
+    pause() {
+        this.paused = true;
+    },
+    resume() {
+        debounce(() => this.paused = false);
     }
 }
 });

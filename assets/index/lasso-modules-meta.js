@@ -15,5 +15,3 @@ $_mod.remap("/marko$4.0.0-rc.12/runtime/loader/index-browser", "/marko$4.0.0-rc.
 $_mod.installed("marko$4.0.0-rc.12", "listener-tracker", "2.0.0");
 $_mod.main("/listener-tracker$2.0.0", "lib/listener-tracker");
 $_mod.installed("marko$4.0.0-rc.12", "morphdom", "2.3.1");
-$_mod.installed("markojs-website$1.0.0", "headspace", "0.1.1");
-$_mod.main("/headspace$0.1.1", "dist/headspace");
