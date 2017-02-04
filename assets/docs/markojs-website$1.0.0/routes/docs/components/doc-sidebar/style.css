@@ -1,11 +1,10 @@
 .doc-sidebar {
     width:16em;
     margin-right:2em;
-    position: fixed;
+    position: absolute;
     padding:2.5em;
-    top:0; left:0; bottom:4.5em;
+    top:0; left:0; bottom:0;
     overflow:auto;
-    transition: transform 0.3s;
     transform:translateY(4.5em);
 }
 
@@ -15,9 +14,18 @@
     flex-shrink: 0;
 }
 
+.doc-sidebar.fixed {
+    position:fixed;
+    bottom:4.5em;
+}
+
 .doc-sidebar.no-header {
     transform:translateY(0);
     bottom:0;
+}
+
+.doc-sidebar.transition {
+    transition: transform 0.3s;
 }
 
 .doc-sidebar .section {

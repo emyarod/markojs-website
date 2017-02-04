@@ -8,7 +8,7 @@ module.exports = {
             this.subscribeTo(a).on('click', () => {
                 header.hide();
                 header.pause();
-                setTimeout(() => header.resume());
+                header.resume();
             });
         });
         this.subscribeTo(this.el.querySelector('a.selected')).on('click', (e) => {
@@ -16,11 +16,20 @@ module.exports = {
             header.reset();
             e.preventDefault();
         });
-        this.subscribeTo(header).on('show', () => {
+        this.subscribeTo(header).on('reset', () => {
             this.el.classList.remove('no-header');
+            this.el.classList.remove('fixed');
+            setTimeout(() => this.el.classList.remove('transition'), 300);
+        });
+        this.subscribeTo(header).on('fix', () => {
+            this.el.classList.remove('no-header');
+            this.el.classList.add('fixed');
+            setTimeout(() => this.el.classList.add('transition'), 300);
         });
         this.subscribeTo(header).on('hide', () => {
             this.el.classList.add('no-header');
+            this.el.classList.add('fixed');
+            setTimeout(() => this.el.classList.add('transition'), 300);
         });
     }
 }
