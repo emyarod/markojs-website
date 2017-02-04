@@ -101,7 +101,7 @@ $_mod.def("/markojs-website$1.0.0/components/site-header/widget", function(requi
     fixed: 'headspace--fixed',
     hidden: 'headspace--hidden'
 };
-var debounce = (cb) => window.requestAnimationFrame(cb);
+var debounce = (cb) => () => window.requestAnimationFrame(cb);
 var tolerance = 4;
 
 module.exports = {
@@ -109,7 +109,7 @@ module.exports = {
         var scrollLast = window.pageYOffset;
         var startOffset = this.el.offsetHeight;
 
-        var handleScroll = () => {
+        var handleScroll = debounce(() => {
             var scrollCurrent = window.pageYOffset;
 
             if (scrollCurrent <= 0) {
@@ -119,7 +119,7 @@ module.exports = {
             }
 
             scrollLast = scrollCurrent;
-        };
+        });
 
         window.addEventListener('scroll', handleScroll);
     },
@@ -151,4 +151,3 @@ module.exports = {
     }
 }
 });
-$_mod.def("/markojs-website$1.0.0/components/code-block-marko/widget",function(o,e,t,c,s){var a=o("/marko$4.0.0-rc.12/widgets/index-browser").getWidgetForEl;t.exports={changeSyntax:function(){var o=a(document.querySelector(".site-header")),e=document.body.scrollTop,t=this.el.offsetTop;o.pause(),"concise"===localStorage.syntax?(localStorage.syntax="html",document.body.classList.remove("concise")):(localStorage.syntax="concise",document.body.classList.add("concise"));var c=this.el.offsetTop,s=e-t+c;document.body.scrollTop=s,o.resume()}}});

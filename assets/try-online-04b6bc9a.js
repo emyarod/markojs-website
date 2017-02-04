@@ -19336,7 +19336,7 @@ $_mod.def("/markojs-website$1.0.0/components/site-header/widget", function(requi
     fixed: 'headspace--fixed',
     hidden: 'headspace--hidden'
 };
-var debounce = (cb) => window.requestAnimationFrame(cb);
+var debounce = (cb) => () => window.requestAnimationFrame(cb);
 var tolerance = 4;
 
 module.exports = {
@@ -19344,7 +19344,7 @@ module.exports = {
         var scrollLast = window.pageYOffset;
         var startOffset = this.el.offsetHeight;
 
-        var handleScroll = () => {
+        var handleScroll = debounce(() => {
             var scrollCurrent = window.pageYOffset;
 
             if (scrollCurrent <= 0) {
@@ -19354,7 +19354,7 @@ module.exports = {
             }
 
             scrollLast = scrollCurrent;
-        };
+        });
 
         window.addEventListener('scroll', handleScroll);
     },
